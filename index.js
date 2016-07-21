@@ -9,49 +9,8 @@ var request = require('request');
 // Custom packages
 var oauth_util = require('./lib/oauth_util');
 var errorStrings = require('./lib/error');
-var issue = require('./api/issue');
-var applicationProperties = require('./api/application-properties');
-var attachment = require('./api/attachment');
-var auditing = require('./api/auditing');
-var avatar = require('./api/avatar');
-var board = require('./api/board');
-var comment = require('./api/comment');
-var issueLink = require('./api/issueLink');
-var issueLinkType = require('./api/issueLinkType');
-var groups = require('./api/groups');
-var groupUserPicker = require('./api/groupUserPicker');
-var customFieldOption = require('./api/customFieldOption');
-var jql = require('./api/jql');
-var licenseValidator = require('./api/licenseValidator');
-var myPermissions = require('./api/myPermissions');
-var projectValidate = require('./api/projectValidate');
-var securityLevel = require('./api/securityLevel');
-var serverInfo = require('./api/serverInfo');
-var dashboard = require('./api/dashboard');
-var field = require('./api/field');
-var issueType = require('./api/issueType');
-var priority = require('./api/priority');
-var reindex = require('./api/reindex');
-var resolution = require('./api/resolution');
-var search = require('./api/search');
-var status = require('./api/status');
-var statusCategory = require('./api/statusCategory');
-var licenseRole = require('./api/licenseRole');
-var myPreferences = require('./api/myPreferences');
-var myself = require('./api/myself');
-var password = require('./api/password');
-var settings = require('./api/settings');
-var component = require('./api/component');
-var group = require('./api/group');
-var workflow = require('./api/workflow');
-var filter = require('./api/filter');
-var screens = require('./api/screens');
-var version = require('./api/version');
-var project = require('./api/project');
-var projectCategory = require('./api/projectCategory');
-var user = require('./api/user');
-var workflowScheme = require('./api/workflowScheme');
-var worklog = require('./api/worklog');
+var sprint = require('./api/sprint');
+var rapidView = require('./api/rapidView');
 
 /**
  * Represents a client for the Jira REST API
@@ -129,8 +88,7 @@ var JiraClient = module.exports = function (config) {
     this.protocol = config.protocol ? config.protocol : 'https';
     this.path_prefix = config.path_prefix ? config.path_prefix : '/';
     this.port = config.port;
-    this.apiVersion = 2; // TODO Add support for other versions.
-    this.agileApiVersion = '1.0';
+    this.apiVersion = 1.0; // TODO Add support for other versions.
 
     if (config.oauth) {
         if (!config.oauth.consumer_key) {
@@ -169,49 +127,8 @@ var JiraClient = module.exports = function (config) {
         this.cookie_jar = config.cookie_jar;
     }
 
-    this.issue = new issue(this);
-    this.applicationProperties = new applicationProperties(this);
-    this.attachment = new attachment(this);
-    this.auditing = new auditing(this);
-    this.avatar = new avatar(this);
-    this.board = new board(this);
-    this.comment = new comment(this);
-    this.issueLink = new issueLink(this);
-    this.issueLinkType = new issueLinkType(this);
-    this.groups = new groups(this);
-    this.groupUserPicker = new groupUserPicker(this);
-    this.customFieldOption = new customFieldOption(this);
-    this.jql = new jql(this);
-    this.licenseValidator = new licenseValidator(this);
-    this.myPermissions = new myPermissions(this);
-    this.projectValidate = new projectValidate(this);
-    this.securityLevel = new securityLevel(this);
-    this.serverInfo = new serverInfo(this);
-    this.dashboard = new dashboard(this);
-    this.field = new field(this);
-    this.issueType = new issueType(this);
-    this.priority = new priority(this);
-    this.reindex = new reindex(this);
-    this.resolution = new resolution(this);
-    this.search = new search(this);
-    this.status = new status(this);
-    this.statusCategory = new statusCategory(this);
-    this.licenseRole = new licenseRole(this);
-    this.myPreferences = new myPreferences(this);
-    this.myself = new myself(this);
-    this.password = new password(this);
-    this.settings = new settings(this);
-    this.component = new component(this);
-    this.group = new group(this);
-    this.workflow = new workflow(this);
-    this.filter = new filter(this);
-    this.screens = new screens(this);
-    this.version = new version(this);
-    this.project = new project(this);
-    this.projectCategory = new projectCategory(this);
-    this.user = new user(this);
-    this.workflowScheme = new workflowScheme(this);
-    this.worklog = new worklog(this);
+        this.sprint = new sprint(this);
+    this.rapidView = new rapidView(this);
 };
 
 (function () {
@@ -225,34 +142,13 @@ var JiraClient = module.exports = function (config) {
      * @returns {string} The constructed URL.
      */
     this.buildURL = function (path) {
-        var apiBasePath = this.path_prefix + 'rest/api/';
+        var apiBasePath = this.path_prefix + 'rest/greenhopper/';
         var version = this.apiVersion;
         var requestUrl = url.format({
             protocol: this.protocol,
             hostname: this.host,
             port: this.port,
-            pathname: apiBasePath + version + path
-        });
-
-        return decodeURIComponent(requestUrl);
-    };
-
-    /**
-     * Simple utility to build a REST endpoint URL for the Jira Agile API.
-     *
-     * @method buildAgileURL
-     * @memberOf JiraClient#
-     * @param path The path of the URL without concern for the root of the REST API.
-     * @returns {string} The constructed URL.
-     */
-    this.buildAgileURL = function (path) {
-        var apiBasePath = this.path_prefix + 'rest/agile/';
-        var version = this.agileApiVersion;
-        var requestUrl = url.format({
-            protocol: this.protocol,
-            hostname: this.host,
-            port: this.port,
-            pathname: apiBasePath + version + path
+            pathname: apiBasePath + '1.0' + path
         });
 
         return decodeURIComponent(requestUrl);

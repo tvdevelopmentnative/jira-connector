@@ -1,7 +1,7 @@
 {
-  "name": "jira-connector",
-  "version": "2.3.0",
-  "description": "Easy to use NodeJS wrapper for the Jira REST API.",
+  "name": "jira-connector-greenhoooper",
+  "version": "1.0.0",
+  "description": "Easy to use NodeJS wrapper for the Jira REST GreenHooper Agile API.",
   "keywords": [
     "JIRA",
     "REST",
@@ -11,14 +11,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Caleb Brinkman <floralvikings@gmail.com>",
-  "license": "MIT",
+  "author": "Brian Miller <brian.miller@mi9.com.au>",
+  "license": "Fork",
   "dependencies": {
     "oauth": "^0.9.12",
     "request": "^2.51.0"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:floralvikings/jira-connector.git"
+    "url": "git@github.com:tvdevelopmentnative/jira-connector-greenhooper.git"
   }
 }
