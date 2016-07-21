@@ -1,7 +1,7 @@
 {
-  "name": "jira-connector-greenhoooper",
+  "name": "jira-connector-greenhooper",
   "version": "1.0.0",
-  "description": "Easy to use NodeJS wrapper for the Jira REST GreenHooper Agile API.",
+  "description": "Easy to use NodeJS wrapper for the deprecated Jira REST GreenHooper Agile API (<= Jira 5.x).",
   "keywords": [
     "JIRA",
     "REST",
@@ -12,7 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brian Miller <brian.miller@mi9.com.au>",
-  "license": "Fork",
+  "license": "Fork from Caleb Brinkman",
   "dependencies": {
     "oauth": "^0.9.12",
     "request": "^2.51.0"
