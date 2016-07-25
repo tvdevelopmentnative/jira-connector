@@ -1,6 +1,6 @@
 {
   "name": "jira-connector-greenhopper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Easy to use NodeJS wrapper for the deprecated Jira REST GreenHooper Agile API (<= Jira 5.x).",
   "keywords": [
     "JIRA",
@@ -19,6 +19,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:tvdevelopmentnative/jira-connector-greenhooper.git"
+    "url": "git@github.com:tvdevelopmentnative/jira-connector-greenhopper.git"
   }
 }

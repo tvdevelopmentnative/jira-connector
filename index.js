@@ -11,6 +11,7 @@ var oauth_util = require('./lib/oauth_util');
 var errorStrings = require('./lib/error');
 var sprint = require('./api/sprint');
 var rapidView = require('./api/rapidView');
+var teamCalendar = require('./api/teamCalendar');
 
 /**
  * Represents a client for the Jira REST API
@@ -127,8 +128,9 @@ var JiraClient = module.exports = function (config) {
         this.cookie_jar = config.cookie_jar;
     }
 
-        this.sprint = new sprint(this);
+    this.sprint = new sprint(this);
     this.rapidView = new rapidView(this);
+    this.teamCalendar = new teamCalendar(this);
 };
 
 (function () {

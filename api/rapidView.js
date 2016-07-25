@@ -25,7 +25,6 @@ function RapidViewClient(jiraClient) {
             json: true,
             followAllRedirects: true
         };
-        console.log(options);
         this.jiraClient.makeRequest(options, callback);
     };
 
