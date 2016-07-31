@@ -122,10 +122,6 @@ function SprintClient(jiraClient) {
         if (!qs) qs = {};
         if (!body) body = {};
 
-        console.log(this.jiraClient.buildURL(basePath + path));
-        console.log(method);
-        console.log(body);
-        console.log(qs);
         return {
             uri: this.jiraClient.buildURL(basePath + path),
             method: method,
