@@ -10,8 +10,7 @@ var request = require('request');
 var oauth_util = require('./lib/oauth_util');
 var errorStrings = require('./lib/error');
 var sprint = require('./api/sprint');
-var rapidView = require('./api/rapidView');
-var teamCalendar = require('./api/teamCalendar');
+var board = require('./api/board');
 
 /**
  * Represents a client for the Jira REST API
@@ -129,8 +128,7 @@ var JiraClient = module.exports = function (config) {
     }
 
     this.sprint = new sprint(this);
-    this.rapidView = new rapidView(this);
-    this.teamCalendar = new teamCalendar(this);
+    this.board = new board(this);
 };
 
 (function () {
@@ -144,7 +142,7 @@ var JiraClient = module.exports = function (config) {
      * @returns {string} The constructed URL.
      */
     this.buildURL = function (path) {
-        var apiBasePath = this.path_prefix + 'rest/greenhopper/';
+        var apiBasePath = this.path_prefix + 'rest/agile/';
         var version = this.apiVersion;
         var requestUrl = url.format({
             protocol: this.protocol,

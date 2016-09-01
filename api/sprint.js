@@ -11,57 +11,6 @@ function SprintClient(jiraClient) {
     this.jiraClient = jiraClient;
 
     /**
-     * Get a list of all sprints in a rapid view.
-     *
-     * @method getAllSprints
-     * @memberOf SprintClient#
-     * @param opts The request options to send to the Jira API
-     * @param [opts.includeHistoricSprints] An optional filter that is applied to the list of radpiviews. Valid values include
-     *     "true" for returning older sprints, and "false" for not returning older sprints.
-     * @param [opts.includeFutureSprints] An optional filter that is applied to the list of radpiviews. Valid values include
-     *     "true" for returning future sprints, and "false" for not returning future sprints.
-     * @param callback Called when the dashboards have been retrieved.
-     */
-    this.getAllSprints = function (opts, callback) {
-        var options = {
-            uri: this.jiraClient.buildURL('/sprintquery/'+ opts.rapidViewID),
-            method: 'GET',
-            json: true,
-            followAllRedirects: true,
-            qs: {
-                includeHistoricSprints: opts.includeHistoricSprints,
-                includeFutureSprints: opts.includeFutureSprints
-            }
-        };
-        this.jiraClient.makeRequest(options, callback);
-    };
-
-    /**
-     * Get a single sprint report including all issues
-     *
-     * @method getSprint
-     * @memberOf SprintClient#
-     * @param opts The request options sent to the Jira API.
-     * @param opts.rapidViewId The rapid View id.
-     * @param opts.sprintId The sprint id.
-     * @param callback Called when the dashboard has been retrieved
-     */
-    this.getSprint = function (opts, callback) {
-        var options = {
-            uri: this.jiraClient.buildURL('/rapid/charts/sprintreport'),
-            method: 'GET',
-            json: true,
-            followAllRedirects: true,
-            qs: {
-                rapidViewId: opts.rapidViewId,
-                sprintId: opts.sprintId
-            }
-        };
-
-        this.jiraClient.makeRequest(options, callback);
-    }
-
-    /**
      * Adds an issue to a sprint
      *
      * @method addToSprint
@@ -76,7 +25,7 @@ function SprintClient(jiraClient) {
             throw new Error('No Issue Passed');
         }
 
-        var options = this.buildRequestOptions(opts, '', 'PUT', opts.issue);
+        var options = this.buildRequestOptions(opts, '', 'POST', opts.issue);
         
         this.jiraClient.makeRequest(options, callback, 'Added to Sprint');
     }
@@ -118,7 +67,7 @@ function SprintClient(jiraClient) {
      */
     this.buildRequestOptions = function (opts, path, method, body, qs) {
         //rest/greenhopper/1.0/sprint/rank/210/remove?issues=IOSOCT-2172
-        var basePath = '/sprint/rank/';
+        var basePath = '/sprint/' + opts.sprint + '/issue';
         if (!qs) qs = {};
         if (!body) body = {};
 
