@@ -63,6 +63,11 @@ function BoardClient(jiraClient) {
             method: 'GET',
             json: true,
             followAllRedirects: true,
+            qs: {
+                state: opts.state,
+                startAt: opts.startAt,
+                maxResults: opts.maxResults
+            }
         };
 
         this.jiraClient.makeRequest(options, callback);
